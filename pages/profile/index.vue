@@ -10,7 +10,7 @@
 <script>
 export default {
   created () {
-    if (this.$store.state.user.jwt === null) {
+    if (!this.$store.state.auth.loggedIn) {
       this.$router.push('/login')
     }
   }

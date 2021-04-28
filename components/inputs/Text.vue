@@ -11,14 +11,27 @@
         @focus="focus"
         @input="$emit('input', $event.target.value)"
       >
-      <span :class="[minimized ? 'top-0 text-xs text-gray-500': 'top-1/2 -translate-y-1/2 text-gray-600', 'absolute left-0 z-0 mx-4 capitalize duration-150 transform pointer-events-none py-1']">{{ placeholder }}</span>
+      <span
+        :class="[
+          minimized
+            ? 'top-0 text-xs text-gray-500'
+            : 'top-1/2 -translate-y-1/2 text-gray-600',
+          'absolute left-0 z-0 mx-4 capitalize duration-150 transform pointer-events-none py-1',
+        ]"
+      >{{ placeholder }}</span>
     </div>
+    <span v-if="error !== null" class="text-sm text-red-400">{{ error }}</span>
   </div>
 </template>
 
 <script>
 export default {
   props: {
+    error: {
+      type: String,
+      required: false,
+      default: null
+    },
     placeholder: {
       type: String,
       required: true
@@ -77,5 +90,4 @@ export default {
 </script>
 
 <style>
-
 </style>

@@ -30,7 +30,7 @@
         <div>
           <div v-for="(ingredient, index) in ingredients" :key="'ingredients-'+index" class="flex mb-3">
             <v-text-input v-model="ingredients[index]" class="flex flex-grow" :placeholder="index+1 + ' - ingredient'" />
-            <button class="flex items-center p-2 my-auto ml-2 bg-gray-100 rounded-full material-icons" @click="removeIngredient(index)">
+            <button class="flex items-center p-2 my-auto ml-2 rounded-full material-icons" @click="removeIngredient(index)">
               close
             </button>
           </div>
@@ -48,7 +48,7 @@
         <div>
           <div v-for="(ingredient, index) in instructions" :key="'instructions-'+index+1" class="flex mb-3">
             <v-text-input v-model="instructions[index]" class="flex flex-grow" :placeholder="index+1 + ' - instruction'" />
-            <button class="flex items-center p-2 my-auto ml-2 bg-gray-100 rounded-full material-icons" @click="removeInstruction(index)">
+            <button class="flex items-center p-2 my-auto ml-2 rounded-full material-icons" @click="removeInstruction(index)">
               close
             </button>
           </div>

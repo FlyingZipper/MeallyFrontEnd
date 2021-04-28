@@ -19,7 +19,7 @@
       <div class="flex justify-center">
         <div class="px-5" />
         <img :src="img" class="rounded-lg drag-drop-img">
-        <button class="flex items-center p-2 my-auto ml-2 bg-gray-100 rounded-full material-icons" @click="removeImage(index)">
+        <button class="flex items-center p-2 my-auto ml-2 rounded-full material-icons" @click="removeImage(index)">
           close
         </button>
       </div>

@@ -7,6 +7,7 @@
 <script>
 import RegisterVue from '~/components/user/Register.vue'
 export default {
+  auth: false,
   components: {
     'v-register': RegisterVue
   }

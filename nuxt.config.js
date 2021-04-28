@@ -37,16 +37,62 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~plugins/clickOutside'
+    '~plugins/clickOutside',
+    '~/plugins/vue-masonry',
+    '~/plugins/lodash'
   ],
 
   router: {
+    middleware: ['auth'],
     scrollBehavior (to, from, savedPosition) {
       if (savedPosition) {
         return savedPosition
       }
 
       return { x: 0, y: 0 }
+    }
+  },
+
+  auth: {
+    localStorage: false,
+    cookie: {
+      prefix: 'auth.',
+      options: {
+        path: '/',
+        secure: false // PRODUCTION : TRUE
+      }
+    },
+    strategies: {
+      local: {
+        scheme: 'refresh',
+        token: {
+          property: 'access',
+          required: true,
+          type: 'Bearer',
+          maxAge: 1800
+        },
+        refreshToken: {
+          property: 'refresh',
+          data: 'refresh',
+          maxAge: 60 * 60 * 24 * 30
+        },
+        user: {
+          property: false,
+          autoFetch: true
+        },
+        endpoints: {
+          login: { url: '/user/login/', method: 'post', propertyName: 'access' },
+          refresh: { url: '/user/login/refresh/', method: 'post' },
+          user: { url: '/user/', method: 'get', propertyName: false },
+          logout: { url: '/user/logout/', method: 'post' }
+        }
+      }
+    },
+    redirect: {
+      login: '/login', // works
+      logout: '/login',
+      callback: '/login',
+      home: '/home'
     }
   },
 
@@ -67,11 +113,15 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     // https://www.npmjs.com/package/@nuxtjs/style-resources
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    // https://auth.nuxtjs.org/
+    '@nuxtjs/auth-next'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: 'http://127.0.0.1:8000/'
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
